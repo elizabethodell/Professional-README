@@ -23,6 +23,20 @@ const questions = [
 
     {
         type: 'input',
+        name: 'description',
+        message: 'What is your README file description? (Required)',
+        validate: descriptionInput => {
+            if (descriptionInput) {
+                return true;
+            } else {
+                console.log('Please enter your README title!');
+                return false;
+            }
+        }
+    },
+
+    {
+        type: 'input',
         name: 'installation',
         message: 'How do you install this program? (Required)',
         validate: installationInput => {
@@ -41,6 +55,20 @@ const questions = [
         message: 'What are installation instructions? (Required)',
         validate: instructionsInput => {
             if (instructionsInput) {
+                return true;
+            } else {
+                console.log('Please enter your installation guide!');
+                return false;
+            }
+        }
+    },
+
+    {
+        type: 'input',
+        name: 'contribution',
+        message: 'Who helped contribute? (Required)',
+        validate: contributionInput => {
+            if (contributionInput) {
                 return true;
             } else {
                 console.log('Please enter your installation guide!');
