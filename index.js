@@ -3,7 +3,7 @@ const fs = require('fs');
 const inquirer = require('inquirer');
 const util = require('util');
 
-const generatorMarkdown = require('./utils/generateMarkdown');
+const generateMarkdown = require('./utils/generateMarkdown');
 
 // TODO: Create an array of questions for user input
 const questions = [
@@ -39,7 +39,7 @@ const questions = [
         type: 'input',
         name: 'instructions',
         message: 'What are installation instructions? (Required)',
-        validate: instructuionsInput => {
+        validate: instructionsInput => {
             if (instructionsInput) {
                 return true;
             } else {
@@ -84,6 +84,7 @@ const questions = [
         choices: ['Apache', 'MIT', 'ISC', 'GNU GPLv3']
     },
 
+    
     {
         type: 'input',
         name: 'email',
@@ -102,22 +103,24 @@ const questions = [
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
-    // fs.writeToFile(fileName, data, funcion(err) {
-    console.log(fileName)
-    console.log(data)
-    if (err) {
-        return console.log(err)
-    } else {
-        console.log("README file created!")
-    }
+    fs.writeFile(fileName, data, function(err) {
+        console.log(fileName)
+        console.log(data)
+        if (err) {
+            return console.log(err)
+        } else {
+            console.log("README file created!")
+        }
+    })
 }
+
 
 
 // TODO: Create a function to initialize app
 function init() {
     inquirer.prompt(questions)
         .then(function (data) {
-            writeToFile("README.md", generatorMarkdown(data));
+            writeToFile("README.md", generateMarkdown(data));
             console.log(data)
         })
 }
